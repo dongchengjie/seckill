@@ -20,7 +20,7 @@ public class VerificationUtil {
     public static boolean isVaild(HttpSession session, String code) {
         if (session != null && code != null) {
             String rightCode = (String) session.getAttribute(VERIFICATION);
-            return code.equals(rightCode);
+            return code.equalsIgnoreCase(rightCode);
         }
         return false;
     }
