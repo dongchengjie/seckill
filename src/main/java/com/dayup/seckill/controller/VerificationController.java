@@ -8,6 +8,7 @@ import cn.hutool.http.server.HttpServerRequest;
 import cn.hutool.http.server.HttpServerResponse;
 import com.dayup.seckill.response.Error;
 import com.dayup.seckill.response.ErrorList;
+import com.dayup.seckill.util.VerificationUtil;
 import com.google.gson.Gson;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -35,8 +36,8 @@ public class VerificationController {
     @ResponseBody
     public String getVerificationImage(HttpServletResponse response, HttpSession session) {
         //定义图形验证码的长、宽、验证码字符数、干扰线宽度
-        ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 100, 4, 4);
-        session.setAttribute("verify", captcha.getCode());
+        ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 100, CODE_COUNT, THICKNESS);
+        session.setAttribute(VerificationUtil.VERIFICATION, captcha.getCode());
         try {
             //设置响应格式
             response.setContentType("image/jpeg");
