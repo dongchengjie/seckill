@@ -1,0 +1,21 @@
+logging:
+  level:
+    com:
+      dayup:
+        seckill: debug
+mybatis:
+  type-aliases-package: com.dayup.seckill.entities
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: utf-8
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://120.78.201.5:3306/seckill?serverTimezone=Asia/Shanghai
+    username: root
+  redis:
+    host: 120.78.201.5
+    port: 6379
