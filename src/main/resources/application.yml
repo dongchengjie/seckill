@@ -3,13 +3,19 @@ logging:
     com:
       dayup:
         seckill: debug
-mybatis:
-  type-aliases-package: com.dayup.seckill.entities
+
+#\u670D\u52A1\u5668\u914D\u7F6E
 server:
   port: 8081
   servlet:
     encoding:
       charset: utf-8
+
+#mybatis\u914D\u7F6E
+mybatis:
+  type-aliases-package: com.dayup.seckill.entities
+
+#mysql\u6570\u636E\u6E90
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
