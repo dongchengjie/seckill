@@ -1,23 +1,16 @@
 package com.dayup.seckill.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.captcha.ShearCaptcha;
-import cn.hutool.http.HttpResponse;
-import cn.hutool.http.server.HttpServerRequest;
-import cn.hutool.http.server.HttpServerResponse;
-import com.dayup.seckill.response.Error;
 import com.dayup.seckill.response.ErrorList;
 import com.dayup.seckill.util.VerificationUtil;
 import com.google.gson.Gson;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * Author: 董成杰

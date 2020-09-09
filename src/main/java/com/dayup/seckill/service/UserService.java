@@ -1,7 +1,6 @@
 package com.dayup.seckill.service;
 
 import com.dayup.seckill.entities.User;
-import org.springframework.stereotype.Service;
 
 /**
  * Author: 许淼

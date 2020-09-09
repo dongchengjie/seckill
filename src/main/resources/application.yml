@@ -4,26 +4,30 @@ logging:
       dayup:
         seckill: debug
 
-#\u670D\u52A1\u5668\u914D\u7F6E
+#Server配置
 server:
-  port: 8081
+  port: 8082
   servlet:
     encoding:
       charset: utf-8
 
-#mybatis\u914D\u7F6E
+#mybatis配置
 mybatis:
   type-aliases-package: com.dayup.seckill.entities
+  configuration:
+    map-underscore-to-camel-case: true
 
-#mysql\u6570\u636E\u6E90
 spring:
+  #数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 123456
     url: jdbc:mysql://120.78.201.5:3306/seckill?serverTimezone=Asia/Shanghai
     username: root
-
-#Redis\u914D\u7F6E
+  #Redis配置
   redis:
     host: 120.78.201.5
     port: 6379
+  #Redis解决分布式Session
+  session:
+    store-type: redis

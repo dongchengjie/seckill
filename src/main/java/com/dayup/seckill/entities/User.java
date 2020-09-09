@@ -1,6 +1,5 @@
 package com.dayup.seckill.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
