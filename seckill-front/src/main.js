@@ -12,7 +12,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // import js
 import routes from './js/router/routes'
 import modules from './js/store/store-modules.js'
-import {formatDate} from './js/util/date-format'
+import {
+  formatDate
+} from './js/util/date-format'
 
 Vue.use(VueRouter)
 Vue.use(ElementUi)
@@ -32,7 +34,7 @@ const router = new VueRouter({
   routes // (缩写) 相当于 routes: routes
 })
 
-Vue.filter('date-format', function (value) {
+Vue.filter('date-format', function(value) {
   var date = new Date(value)
   return formatDate(date, 'yyyy-MM-dd hh:mm')
 })

@@ -1,13 +1,13 @@
 <template>
-  <div id="bar">
-    bar
-  </div>
+<div id="bar">
+  bar
+</div>
 </template>
 
 <script>
 export default {
   name: 'bar',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }

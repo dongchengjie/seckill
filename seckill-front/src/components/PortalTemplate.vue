@@ -1,16 +1,15 @@
 <template>
-  <div id="portal-template">
-    <img class="portal-logo" src="../assets/images/logo.png" />
-    <slot></slot>
-  </div>
+<div id="portal-template">
+  <img class="portal-logo" src="../assets/images/logo.png" />
+  <slot></slot>
+</div>
 </template>
 
 <script>
 export default {
   name: 'portal-template',
-  data () {
-    return {
-    }
+  data() {
+    return {}
   }
 }
 </script>
