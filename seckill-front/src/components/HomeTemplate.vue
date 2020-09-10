@@ -24,9 +24,6 @@
           <router-view></router-view>
         </div>
       </el-main>
-      <el-footer>
-        版权所有 &copy; 2018 实训邦
-      </el-footer>
     </el-container>
   </div>
 </template>
