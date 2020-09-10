@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User register(String username, String password) {
-        if (userMapper.getUserByUserName(username) != null) {
+        if (userMapper.selectUserByUserName(username) != null) {
             return null;
         }
         User user = new User(username, SecurityUtil.md5(password));
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return userMapper.getUserByUserName(username);
+        return userMapper.selectUserByUserName(username);
     }
 
     /**
