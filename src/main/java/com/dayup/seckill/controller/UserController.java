@@ -1,12 +1,14 @@
 package com.dayup.seckill.controller;
 
-import com.dayup.seckill.data.ErrorList;
 import com.dayup.seckill.data.ResponseResult;
 import com.dayup.seckill.entities.User;
+import com.dayup.seckill.data.ErrorList;
 import com.dayup.seckill.service.UserService;
+import com.google.gson.Gson;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

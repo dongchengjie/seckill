@@ -20,5 +20,5 @@ public interface UserMapper {
     Integer addUser(User user);
 
     @Select("select * from user where username = #{username}")
-    User selectUserByUserName(String username);
+    User getUserByUserName(String username);
 }
