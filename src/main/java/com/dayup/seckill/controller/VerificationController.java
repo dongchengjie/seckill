@@ -2,7 +2,7 @@ package com.dayup.seckill.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
-import com.dayup.seckill.response.ErrorList;
+import com.dayup.seckill.data.ErrorList;
 import com.dayup.seckill.util.VerificationUtil;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;

@@ -8,5 +8,9 @@ import com.dayup.seckill.entities.User;
  * Description:
  */
 public interface UserService {
-    void regist(User user);
+    User register(String username,String password);
+
+    User getUserByUsername(String username);
+
+    User login(String username,String password);
 }

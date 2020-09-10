@@ -1,7 +1,8 @@
-package com.dayup.seckill.response;
+package com.dayup.seckill.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Author: 董成杰
@@ -9,8 +10,9 @@ import lombok.Data;
  * Description:错误响应信息
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Error {
-    private String errCode;
-    private String errMsg;
+    private String code;
+    private String message;
 }

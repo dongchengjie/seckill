@@ -1,7 +1,10 @@
 package com.dayup.seckill.mapper;
 
 import com.dayup.seckill.entities.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,5 +15,10 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface UserMapper {
-    void addUser(User user);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert(value = "insert into user values (default,#{username},#{password})")
+    Integer addUser(User user);
+
+    @Select("select * from user where username = #{username}")
+    User getUserByUserName(String username);
 }
