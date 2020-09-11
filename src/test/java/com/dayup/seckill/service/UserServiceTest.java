@@ -1,7 +1,9 @@
 package com.dayup.seckill.service;
 
+import cn.hutool.core.lang.UUID;
 import com.dayup.seckill.entities.User;
 import com.dayup.seckill.mapper.UserMapper;
+import com.dayup.seckill.util.UUIDUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,5 +25,6 @@ class UserServiceTest {
 
     @Test
     void getUserByUsername() {
+        System.out.println(UUIDUtil.uuid());
     }
 }

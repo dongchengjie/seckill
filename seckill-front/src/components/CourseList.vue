@@ -6,9 +6,9 @@
     <el-col>
       <!-- 通过class绑定实现切换 -->
       <el-button :class="courseType == 0 ? 'el-button--primary' : 'el-button--text'" size="mini" round @click="changeCourseType(0)">全部课程</el-button>
-      <el-div v-for="item in courseTypes">
+      <el-button-group v-for="item in courseTypes">
         <el-button :class="courseType == item.courseType ? 'el-button--primary' : 'el-button--text'" size="mini" round @click="changeCourseType(item.courseType)">{{item.typeName}}</el-button>
-      </el-div>
+      </el-button-group>
     </el-col>
   </el-row>
   <el-row :gutter="30">

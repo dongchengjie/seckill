@@ -89,7 +89,6 @@ export default {
         "courseName": "",
         "teacherName": "",
         "courseDesciption": "",
-        "coursePeriod": "",
         "startTime": 0,
         "endTime": 0,
         "courcePrice": 0,
@@ -116,7 +115,6 @@ export default {
         } else {
           self.$message.error('该课程不存在')
         }
-
       })
       .catch(function(error) {
         self.$message.error(response)
@@ -127,9 +125,9 @@ export default {
       var self = this;
       self.axios.get('/api/getPath/' + self.$route.params.courseNo)
         .then(function(response) {
-          var path = response.data;
+          var path = response.data.data.path;
           var courseNo = self.$route.params.courseNo;
-          self.axios.get(`/api/${path}/seckill/${courseNo}`)
+          self.axios.get('/api/' + path + '/seckill/' + courseNo)
             .then(function(response) {
               self.getResult(response)
             })
@@ -150,7 +148,7 @@ export default {
           self.showButtonType = 1;
           self.load = false;
           break;
-        case 500100:
+        case 3002:
           var self = this;
           self.isBookButtonDisabled = true;
           self.load = true;
@@ -162,22 +160,22 @@ export default {
               self.$message.error(response)
             });
           break;
-        case 500101:
+        case 3003:
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 500102:
+        case 3004:
           self.load = false;
           self.showButtonType = 1;
           self.$message.error(response.data.message);
           break;
-        case 500104:
+        case 3005:
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 500105:
+        case 1002:
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
@@ -243,7 +241,7 @@ export default {
       var hours = parseInt(leftTime / (24 * 60) % 24)
       var mins = parseInt(leftTime / 60 % 60)
       var sec = parseInt(leftTime % 60)
-      self.courseTimerStatus = `距离开课时间还有 ${days}天${hours}小时${mins}分钟${sec}秒`
+      self.courseTimerStatus = '距离开课时间还有 ${days}天${hours}小时${mins}分钟${sec}秒'
       if (leftTime <= 0) {
         self.isTimerStop = true;
       }
@@ -252,6 +250,6 @@ export default {
 }
 </script>
 
-<style >
+<style>
 @import '../assets/css/course.css'
 </style>
