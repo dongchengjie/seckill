@@ -4,6 +4,7 @@ import com.dayup.seckill.entities.Course;
 import com.dayup.seckill.entities.CourseType;
 import com.dayup.seckill.mapper.CourseMapper;
 import com.dayup.seckill.service.CourseService;
+import com.dayup.seckill.service.CourseTypeService;
 import com.dayup.seckill.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,6 +23,8 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseMapper courseMapper;
+    @Autowired
+    CourseTypeService courseTypeService;
 
     @Override
     @Cacheable(cacheNames = "CourseServiceImpl.getCourseList")
@@ -33,15 +36,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Cacheable(cacheNames = "CourseServiceImpl.getCourseByCourseNo", key = "#courseNo")
     public Course getCourseByCourseNo(Integer courseNo) {
         return courseMapper.selectCourseByCourseNo(courseNo);
     }
 
-    @Override
-    @Cacheable(cacheNames = "CourseServiceImpl.selectCourseType", key = "#courseType")
-    public CourseType selectCourseType(int courseType) {
-        return courseMapper.selectCourseType(courseType);
-    }
 
     @Override
     public List<CourseType> selectCourseTypes(List<Course> courses) {
@@ -60,7 +59,7 @@ public class CourseServiceImpl implements CourseService {
         Collections.sort(courseTypes);
         //查出每个课程类型对应的类型名
         for (Integer courseType : courseTypes) {
-            types.add(selectCourseType(courseType));
+            types.add(courseTypeService.selectCourseType(courseType));
         }
         return types;
     }

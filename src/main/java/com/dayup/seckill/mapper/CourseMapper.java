@@ -5,6 +5,7 @@ import com.dayup.seckill.entities.CourseType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,7 +23,4 @@ public interface CourseMapper {
 
     @Select("select * from course where course_no = #{courseNo}")
     public Course selectCourseByCourseNo(@Param("courseNo") Integer courseNo);
-
-    @Select("select * from course_type where course_type=#{courseType}")
-    CourseType selectCourseType(int courseType);
 }

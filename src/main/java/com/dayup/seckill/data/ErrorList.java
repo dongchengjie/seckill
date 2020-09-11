@@ -14,6 +14,7 @@ public class ErrorList {
     //身份/用户错误码
     public static Error EXISTED_USERNAME = new Error("2001", "该用户名已被注册");
     public static Error USER_LOGIN_FAIL = new Error("2002", "用户名或密码错误");
+    public static Error USER_REGISTER_SUCCESS = new Error("2003", "注册成功");
     //数据错误码
     public static Error RECEIVED_PARAM_ERROR = new Error("3001", "参数传递错误");
     public static Error SECKILL_LINE_UP = new Error("3002", "秒杀排队中");

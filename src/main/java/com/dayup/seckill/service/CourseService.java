@@ -15,7 +15,5 @@ public interface CourseService {
 
     public Course getCourseByCourseNo(Integer courseNo);
 
-    public CourseType selectCourseType(int courseType);
-
     public List<CourseType> selectCourseTypes(List<Course> courses);
 }
