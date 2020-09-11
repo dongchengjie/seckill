@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayup.seckill.mapper.OrderMapper">
+    <insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+        insert into orders
+        (order_id,course_no,username,course_name,course_price,pay_status,create_date)
+        values
+        (default,#{courseNo},#{username},#{courseName},#{coursePrice},#{payStatus},#{createDate})
+    </insert>
+</mapper>

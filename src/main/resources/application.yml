@@ -31,3 +31,9 @@ spring:
   #Redis解决分布式Session
   session:
     store-type: redis
+  #RaabitMQ消息队列配置
+  rabbitmq:
+    host: 120.78.201.5
+    port: 5672
+    username: admin
+    password: admin
