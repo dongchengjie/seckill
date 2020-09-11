@@ -1,5 +1,4 @@
 import Bar from '../../components/Bar'
-import Foo from '../../components/Foo'
 import Login from '../../components/Login'
 import Register from '../../components/Register'
 import HomeTemplate from '../../components/HomeTemplate'
@@ -9,7 +8,6 @@ import Course from '../../components/Course'
 
 export default  [
   { path: '/', component: Login },
-  { path: '/foo', component: Foo },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/home', component: HomeTemplate,
