@@ -1,7 +1,9 @@
 package com.dayup.seckill.service;
 
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,9 +17,9 @@ class OrderServiceTest {
 
     @Test
     public void testSendCourseOrderMessage() {
-        String username = "tom";
-        int courseNo = 2;
-        orderService.sendCourseOrderMessage(username, courseNo);
+        orderService.sendCourseOrderMessage("jack",2);
+        orderService.sendCourseOrderMessage("jack",2);
+        orderService.sendCourseOrderMessage("jack",3);
     }
 
     @Test

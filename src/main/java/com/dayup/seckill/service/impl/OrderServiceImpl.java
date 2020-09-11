@@ -39,10 +39,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public void sendCourseOrderMessage(String username, int courseNo) {
-        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("username", username);
-        map.put("courseNo", courseNo);
-        rabbitTemplate.convertAndSend(COURSE_ORDER_ROUTING_KEY, new Gson().toJson(map));
+        map.put("courseNo", String.valueOf(courseNo));
+        rabbitTemplate.convertAndSend("amq.direct", COURSE_ORDER_ROUTING_KEY, new Gson().toJson(map));
     }
 
     @Override

@@ -96,7 +96,7 @@ export default {
         "courseType": 0,
         "coursePic": ""
       },
-      courseTimerStatus: '距离开课时间还有 1天20小时20分钟30秒',
+      courseTimerStatus: '距离开课时间还有X天X小时X分钟X秒',
       timer: null,
       isTimerStop: true,
       showButtonType: 0,
@@ -105,7 +105,6 @@ export default {
     }
   },
   created() {
-    //距离开课时间还有 1天20小时20分钟30秒
     var self = this;
     self.axios.get('/api/courseDetail/' + self.$route.params.courseNo)
       .then(function(response) {

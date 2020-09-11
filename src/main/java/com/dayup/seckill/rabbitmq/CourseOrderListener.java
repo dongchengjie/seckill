@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Map;
 
 /**
@@ -29,12 +30,12 @@ public class CourseOrderListener {
     private void handleCourseOrder(Message message) {
         try {
             String body = new String(message.getBody(), StandardCharsets.UTF_8);
-            Map<String, Object> map = new Gson().fromJson(body, Map.class);
-            String username = (String) map.get("username");
-            double courseNo = (double) map.get("courseNo");
-            Integer index = orderService.createCourseOrder(username, (int)courseNo);
+            Map<String, String> map = new Gson().fromJson(body, Map.class);
+            String username = map.get("username");
+            String courseNo = map.get("courseNo");
+            Integer index = orderService.createCourseOrder(username, Integer.parseInt(courseNo));
             if (index == 0) {
-                throw new Exception("创建订单失败，" + map.toString());
+                throw new SQLIntegrityConstraintViolationException("创建订单失败，该用户已购买该课程" + map.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
