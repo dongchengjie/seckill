@@ -79,7 +79,7 @@ export default {
             })
             .then((response) => {
               self.$message.success(response.data.message)
-              self.$router.push('/foo');
+              self.$router.push('/login');
             })
             .catch((response) => {
               self.$message.error(response.data.message)

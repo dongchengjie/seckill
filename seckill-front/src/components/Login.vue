@@ -50,7 +50,6 @@ export default {
       var self = this;
       self.$refs[formName].validate((valid) => {
         if (valid) {
-
           self.$store.dispatch('login', {
               username: self.user.username,
               password: self.user.password
