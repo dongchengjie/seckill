@@ -6,7 +6,6 @@ import com.dayup.seckill.mapper.CourseMapper;
 import com.dayup.seckill.mapper.OrderMapper;
 import com.dayup.seckill.service.CourseService;
 import com.dayup.seckill.service.CourseTypeService;
-import com.dayup.seckill.service.OrderService;
 import com.dayup.seckill.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -74,11 +73,5 @@ public class CourseServiceImpl implements CourseService {
         courseMapper.updateStockQuantity(course.getCourseNo(), quantity);
         course.setStockQuantity(quantity);
         return course;
-    }
-
-    @Override
-    @Cacheable(cacheNames = "CourseServiceImpl.isBought", key = "#username+#courseNo")
-    public boolean isBought(String username, int courseNo) {
-        return orderMapper.selectCourseByUsernameAndCourseNo(username, courseNo) != null;
     }
 }

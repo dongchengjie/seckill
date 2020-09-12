@@ -19,5 +19,5 @@ public interface CourseService {
 
     public Course modifyStockQuantity(Course course, int quantity);
 
-    public boolean isBought(String username, int courseNo);
+
 }

@@ -37,6 +37,8 @@ public class CourseOrderListener {
             if (index == 0) {
                 throw new SQLIntegrityConstraintViolationException("创建订单失败，该用户已购买该课程" + map.toString());
             }
+            //刷新缓存中的购买状态
+            orderService.refreshBoughtCache(username, Integer.parseInt(courseNo),true);
         } catch (Exception e) {
             e.printStackTrace();
         }

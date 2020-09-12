@@ -1,6 +1,5 @@
 package com.dayup.seckill.mapper;
 
-import com.dayup.seckill.entities.Course;
 import com.dayup.seckill.entities.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

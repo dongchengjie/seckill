@@ -9,6 +9,8 @@ import com.dayup.seckill.service.OrderService;
 import com.google.gson.Gson;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -56,5 +58,31 @@ public class OrderServiceImpl implements OrderService {
         order.setPayStatus(PayStatus.UNPAID);
         order.setCreateDate(new Date(System.currentTimeMillis()));
         return orderMapper.addOrder(order);
+    }
+
+    /**
+     * 查询用户是否某课程，并放入缓存
+     *
+     * @param username 用户名
+     * @param courseNo 课程号
+     * @return 是否购买某课程
+     */
+    @Override
+    @Cacheable(cacheNames = "CourseServiceImpl.isBought", key = "#username+'-->'+#courseNo")
+    public boolean isBought(String username, int courseNo) {
+        return orderMapper.selectCourseByUsernameAndCourseNo(username, courseNo) != null;
+    }
+
+    /**
+     * 刷新缓存中的购买状态
+     *
+     * @param username 用户名
+     * @param courseNo 课程号
+     * @return 刷新缓存
+     */
+    @Override
+    @CachePut(cacheNames = "CourseServiceImpl.isBought", key = "#username+'-->'+#courseNo")
+    public boolean refreshBoughtCache(String username, int courseNo,boolean isBought) {
+        return isBought;
     }
 }

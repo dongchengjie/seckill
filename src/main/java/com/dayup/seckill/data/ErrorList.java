@@ -23,4 +23,5 @@ public class ErrorList {
     public static Error SECKILL_BOUGHT = new Error("3004", "您已购买过该课程，请不要重复购买");
     public static Error SECKILL_PATH_ERROR = new Error("3005", "您的请求地址不正确");
     public static Error UNKOWN_COURSE = new Error("3006", "对不起，该课程编号不存在");
+    public static Error ORDER_SUCCESS = new Error("3007", "生成订单成功");
 }

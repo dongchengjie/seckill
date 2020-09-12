@@ -10,5 +10,8 @@ public interface OrderService {
 
     public Integer createCourseOrder(String username, int courseNo);
 
+    public boolean isBought(String username, int courseNo);
+
+    public boolean refreshBoughtCache(String username, int courseNo,boolean isBought);
 
 }
