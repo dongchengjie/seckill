@@ -15,10 +15,12 @@ public class ErrorList {
     public static Error EXISTED_USERNAME = new Error("2001", "该用户名已被注册");
     public static Error USER_LOGIN_FAIL = new Error("2002", "用户名或密码错误");
     public static Error USER_REGISTER_SUCCESS = new Error("2003", "注册成功");
+    public static Error IDENTIFICATION_OUT_OF_DATE = new Error("2004", "身份信息过期，请重新登录");
     //数据错误码
     public static Error RECEIVED_PARAM_ERROR = new Error("3001", "参数传递错误");
-    public static Error SECKILL_LINE_UP = new Error("3002", "秒杀排队中");
+    public static Error SECKILL_LINE_UP = new Error("3002", "订单生成中，请稍后");
     public static Error SECKILL_NO_QUOTE = new Error("3003", "非常抱歉，该课程名额已满");
-    public static Error SECKILL_BOUGHT = new Error("3004", "您已购买该课程，请去订单页面查看");
+    public static Error SECKILL_BOUGHT = new Error("3004", "您已购买过该课程，请不要重复购买");
     public static Error SECKILL_PATH_ERROR = new Error("3005", "您的请求地址不正确");
+    public static Error UNKOWN_COURSE = new Error("3006", "对不起，该课程编号不存在");
 }

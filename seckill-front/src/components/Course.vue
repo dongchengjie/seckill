@@ -1,5 +1,5 @@
 <template>
-<div id="course" v-loading.fullscreen.lock="load" element-loading-text="秒杀排队中" element-loading-background="rgba(0, 0, 0, 0.8)">
+<div id="course" v-loading.fullscreen.lock="load" :element-loading-text="loading_text" element-loading-background="rgba(0, 0, 0, 0.8)">
   <!-- 面包屑导航 -->
   <div>
     <el-breadcrumb separator="/">
@@ -101,7 +101,8 @@ export default {
       isTimerStop: true,
       showButtonType: 0,
       isBookButtonDisabled: false,
-      load: false
+      load: false,
+      loading_text: '加载中'
     }
   },
   created() {
@@ -147,10 +148,11 @@ export default {
           self.showButtonType = 1;
           self.load = false;
           break;
-        case 3002:
+        case '3002':
           var self = this;
           self.isBookButtonDisabled = true;
           self.load = true;
+          self.loading_text=response.data.message
           self.axios.get('/api/seckillResult/' + self.$route.params.courseNo)
             .then(function(response) {
               self.getResult(response);
@@ -159,22 +161,22 @@ export default {
               self.$message.error(response)
             });
           break;
-        case 3003:
+        case '3003':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 3004:
+        case '3004':
           self.load = false;
           self.showButtonType = 1;
           self.$message.error(response.data.message);
           break;
-        case 3005:
+        case '3005':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 1002:
+        case '3006':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);

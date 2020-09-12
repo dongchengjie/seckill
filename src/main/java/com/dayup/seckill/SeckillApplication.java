@@ -9,7 +9,8 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 @MapperScan("com.dayup.seckill.mapper")//Mybatis映射文件扫描
 @EnableCaching
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 3600)//Redis解决分布式Session
+//Redis解决分布式Session,Session生命周期30分钟
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 public class SeckillApplication {
     public static void main(String[] args) {
         SpringApplication.run(SeckillApplication.class, args);

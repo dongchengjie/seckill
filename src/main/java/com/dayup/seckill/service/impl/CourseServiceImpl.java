@@ -3,10 +3,13 @@ package com.dayup.seckill.service.impl;
 import com.dayup.seckill.entities.Course;
 import com.dayup.seckill.entities.CourseType;
 import com.dayup.seckill.mapper.CourseMapper;
+import com.dayup.seckill.mapper.OrderMapper;
 import com.dayup.seckill.service.CourseService;
 import com.dayup.seckill.service.CourseTypeService;
+import com.dayup.seckill.service.OrderService;
 import com.dayup.seckill.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,8 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseMapper courseMapper;
     @Autowired
+    OrderMapper orderMapper;
+    @Autowired
     CourseTypeService courseTypeService;
 
     @Override
@@ -40,7 +45,6 @@ public class CourseServiceImpl implements CourseService {
     public Course getCourseByCourseNo(Integer courseNo) {
         return courseMapper.selectCourseByCourseNo(courseNo);
     }
-
 
     @Override
     public List<CourseType> selectCourseTypes(List<Course> courses) {
@@ -62,5 +66,19 @@ public class CourseServiceImpl implements CourseService {
             types.add(courseTypeService.selectCourseType(courseType));
         }
         return types;
+    }
+
+    @Override
+    @CachePut(cacheNames = "CourseServiceImpl.getCourseByCourseNo", key = "#course.courseNo")
+    public Course modifyStockQuantity(Course course, int quantity) {
+        courseMapper.updateStockQuantity(course.getCourseNo(), quantity);
+        course.setStockQuantity(quantity);
+        return course;
+    }
+
+    @Override
+    @Cacheable(cacheNames = "CourseServiceImpl.isBought", key = "#username+#courseNo")
+    public boolean isBought(String username, int courseNo) {
+        return orderMapper.selectCourseByUsernameAndCourseNo(username, courseNo) != null;
     }
 }

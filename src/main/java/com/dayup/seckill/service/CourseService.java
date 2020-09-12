@@ -16,4 +16,8 @@ public interface CourseService {
     public Course getCourseByCourseNo(Integer courseNo);
 
     public List<CourseType> selectCourseTypes(List<Course> courses);
+
+    public Course modifyStockQuantity(Course course, int quantity);
+
+    public boolean isBought(String username, int courseNo);
 }
