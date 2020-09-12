@@ -38,7 +38,7 @@ public class UserController extends BaseController{
             result.setErrorInfo(ErrorList.EXISTED_USERNAME);
             return result;
         }
-        result.put("user", user);
+        result.setErrorInfo(ErrorList.USER_REGISTER_SUCCESS);
         return result;
     }
 

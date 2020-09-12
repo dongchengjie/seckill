@@ -24,7 +24,6 @@ export default {
         Vue.axios.post('/api/login', qs.stringify(payload))
           .then(function(response) {
             var result = response.data;
-            console.log(result)
             if (result.code == 200) {
               context.commit('login', payload)
               resolve(response)
@@ -46,13 +45,14 @@ export default {
       return new Promise((resolve, reject) => {
         Vue.axios.post('/api/register', qs.stringify(payload))
           .then(function(response) {
-            // var result = response.data;
-            // if (result.code == 200) {
-            //   context.commit('login', payload)
-            //   resolve(response)
-            // } else {
-            //   reject(response)
-            // }
+            var result = response.data;
+            console.log(result)
+            if (result.code = 2003) {
+              context.commit('register', payload)
+              resolve(response)
+            } else {
+              reject(response)
+            }
           })
           .catch(function(error) {
             var errorData = {

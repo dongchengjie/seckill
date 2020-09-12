@@ -46,4 +46,5 @@ public class CourseController extends BaseController {
         result.put("course", course);
         return result;
     }
+
 }

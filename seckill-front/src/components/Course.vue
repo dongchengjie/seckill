@@ -1,5 +1,5 @@
 <template>
-<div id="course" v-loading.fullscreen.lock="load" element-loading-text="秒杀排队中" element-loading-background="rgba(0, 0, 0, 0.8)">
+<div id="course" v-loading.fullscreen.lock="load" :element-loading-text="loading_text" element-loading-background="rgba(0, 0, 0, 0.8)">
   <!-- 面包屑导航 -->
   <div>
     <el-breadcrumb separator="/">
@@ -89,7 +89,6 @@ export default {
         "courseName": "",
         "teacherName": "",
         "courseDesciption": "",
-        "coursePeriod": "",
         "startTime": 0,
         "endTime": 0,
         "courcePrice": 0,
@@ -97,16 +96,16 @@ export default {
         "courseType": 0,
         "coursePic": ""
       },
-      courseTimerStatus: '距离开课时间还有 1天20小时20分钟30秒',
+      courseTimerStatus: '距离开课时间还有X天X小时X分钟X秒',
       timer: null,
       isTimerStop: true,
       showButtonType: 0,
       isBookButtonDisabled: false,
-      load: false
+      load: false,
+      loading_text: '加载中'
     }
   },
   created() {
-    //距离开课时间还有 1天20小时20分钟30秒
     var self = this;
     self.axios.get('/api/courseDetail/' + self.$route.params.courseNo)
       .then(function(response) {
@@ -116,7 +115,6 @@ export default {
         } else {
           self.$message.error('该课程不存在')
         }
-
       })
       .catch(function(error) {
         self.$message.error(response)
@@ -127,9 +125,9 @@ export default {
       var self = this;
       self.axios.get('/api/getPath/' + self.$route.params.courseNo)
         .then(function(response) {
-          var path = response.data;
+          var path = response.data.data.path;
           var courseNo = self.$route.params.courseNo;
-          self.axios.get(`/api/${path}/seckill/${courseNo}`)
+          self.axios.get('/api/' + path + '/seckill/' + courseNo)
             .then(function(response) {
               self.getResult(response)
             })
@@ -150,10 +148,11 @@ export default {
           self.showButtonType = 1;
           self.load = false;
           break;
-        case 500100:
+        case '3002':
           var self = this;
           self.isBookButtonDisabled = true;
           self.load = true;
+          self.loading_text=response.data.message
           self.axios.get('/api/seckillResult/' + self.$route.params.courseNo)
             .then(function(response) {
               self.getResult(response);
@@ -162,22 +161,22 @@ export default {
               self.$message.error(response)
             });
           break;
-        case 500101:
+        case '3003':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 500102:
+        case '3004':
           self.load = false;
           self.showButtonType = 1;
           self.$message.error(response.data.message);
           break;
-        case 500104:
+        case '3005':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
           break;
-        case 500105:
+        case '3006':
           self.load = false;
           self.isBookButtonDisabled = false;
           self.$message.error(response.data.message);
@@ -243,7 +242,7 @@ export default {
       var hours = parseInt(leftTime / (24 * 60) % 24)
       var mins = parseInt(leftTime / 60 % 60)
       var sec = parseInt(leftTime % 60)
-      self.courseTimerStatus = `距离开课时间还有 ${days}天${hours}小时${mins}分钟${sec}秒`
+      self.courseTimerStatus = '距离开课时间还有 ${days}天${hours}小时${mins}分钟${sec}秒'
       if (leftTime <= 0) {
         self.isTimerStop = true;
       }
@@ -252,6 +251,6 @@ export default {
 }
 </script>
 
-<style >
+<style>
 @import '../assets/css/course.css'
 </style>
