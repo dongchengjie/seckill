@@ -56,7 +56,7 @@ public class SeckillController extends BaseController {
             return result;
         }
         String path = (String) session.getAttribute("path");
-        if (!StringUtils.isEmpty(p) && path.equals(p)) {
+        if (!StringUtils.isEmpty(p) && !StringUtils.isEmpty(path) && path.equals(p)) {
             result = seckillService.seckill(user.getUsername(), courseNo, request);
         } else {
             result.setErrorInfo(ErrorList.SECKILL_PATH_ERROR);//您的请求地址不正确

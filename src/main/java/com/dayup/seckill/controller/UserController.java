@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Description:用户控制器
  */
 @Controller
-public class UserController extends BaseController{
+public class UserController extends BaseController {
     @Autowired
     UserService userService;
 
@@ -46,6 +46,11 @@ public class UserController extends BaseController{
     @ResponseBody
     public ResponseResult login(String username, String password, HttpSession session) {
         ResponseResult result = new ResponseResult();
+        User u = (User) session.getAttribute("user");
+        if (u != null) {
+            result.setErrorInfo(ErrorList.SUCCESS);//已经登录,无需再登录
+            return result;
+        }
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             result.setErrorInfo(ErrorList.FAIL);
             return result;

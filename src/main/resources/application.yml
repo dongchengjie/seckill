@@ -10,6 +10,7 @@ server:
   servlet:
     encoding:
       charset: utf-8
+      force: true
 
 #mybatis配置
 mybatis:
