@@ -101,4 +101,12 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrderListByUsername(String username) {
         return orderMapper.selectOrdersByUsername(username);
     }
+
+    @Override
+    @CachePut(cacheNames = "OrderServiceImpl.getOrderListByUsername", key = "#username")
+    public List<Order> refreshOrderListByUsername(String username) {
+        return orderMapper.selectOrdersByUsername(username);
+    }
+
+
 }

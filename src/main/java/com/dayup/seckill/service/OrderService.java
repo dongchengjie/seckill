@@ -20,4 +20,5 @@ public interface OrderService {
 
     public List<Order> getOrderListByUsername(String username);
 
+    public List<Order> refreshOrderListByUsername(String username);
 }
