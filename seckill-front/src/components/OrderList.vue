@@ -26,27 +26,18 @@
 
       <div class="order-info">
         <img :src="'/src/assets/images/course/' + item.coursePic" class="order-image">
-        <!-- <img v-else src="/src/assets/images/course/c1.jpg" class="image order-image"> -->
-
         <div class="course-info">
           <span class="course-info-name">{{item.courseName}}</span>
           <span class="course-info-price"> ￥{{item.coursePrice == null ? 0 : item.coursePrice}} </span>
         </div>
         <div class="order-pay-info">
           <div v-if="item.payStatus == 1">
-            <span>已完成</span><br />
-            <!-- <span>支付方式</span> -->
-            <span v-if="item.payment == 0 ">支付宝支付</span>
-            <span v-else-if="item.payment == 1">微信支付</span>
-            <span v-else>其他支付</span>
+            <el-tag type="info" disable-transitions="true">支付方式：{{item.payment}}</el-tag>
           </div>
-          <div v-else-if="item.payStatus == 0"><span>未支付</span></div>
+          <div v-else-if="item.payStatus == 0">
+            <el-button type="success">立即支付</el-button>
+          </div>
           <div v-else><span>已失效</span></div>
-          <!-- <div v-else> -->
-          <!-- <span v-if="item.payStatus == -1 ">已失效</span> -->
-          <!-- <span v-else>未支付</span> <br/> -->
-          <!-- <span >未支付</span> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
