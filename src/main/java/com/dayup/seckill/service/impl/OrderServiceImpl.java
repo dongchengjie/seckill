@@ -97,7 +97,8 @@ public class OrderServiceImpl implements OrderService {
      * @return 订单信息
      */
     @Override
-    public List<Order> getOrderList(String username) {
+    @Cacheable(cacheNames = "OrderServiceImpl.getOrderListByUsername", key = "#username")
+    public List<Order> getOrderListByUsername(String username) {
         return orderMapper.selectOrdersByUsername(username);
     }
 }

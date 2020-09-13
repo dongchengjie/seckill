@@ -18,6 +18,6 @@ public interface OrderService {
 
     public boolean refreshBoughtCache(String username, int courseNo, boolean isBought);
 
-    public List<Order> getOrderList(String username);
+    public List<Order> getOrderListByUsername(String username);
 
 }

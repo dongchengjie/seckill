@@ -30,7 +30,7 @@ public class OrderController extends BaseController {
             result.setErrorInfo(ErrorList.IDENTIFICATION_OUT_OF_DATE);//身份信息过期
             return result;
         }
-        result.put("orderList", orderService.getOrderList(user.getUsername()));
+        result.put("orderList", orderService.getOrderListByUsername(user.getUsername()));
         result.setErrorInfo(ErrorList.SUCCESS);
         return result;
     }
