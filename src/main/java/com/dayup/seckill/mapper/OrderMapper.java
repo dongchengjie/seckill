@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Author: 董成杰
  * Date: 2020-09-11 10:47
@@ -18,4 +20,7 @@ public interface OrderMapper {
 
     @Select("select * from orders where username = #{username} and course_no = #{courseNo}")
     public Order selectCourseByUsernameAndCourseNo(@Param("username") String username, @Param("courseNo") Integer courseNo);
+
+    @Select("select * from orders where username = #{username}")
+    public List<Order> selectOrdersByUsername(@Param("username") String username);
 }

@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Author: 董成杰
@@ -48,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Integer createCourseOrder(String username, int courseNo) {
         Order order = new Order();
         Course course = courseService.getCourseByCourseNo(courseNo);
@@ -57,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCoursePrice(course.getCoursePrice());
         order.setPayStatus(PayStatus.UNPAID);
         order.setCreateDate(new Date(System.currentTimeMillis()));
+        order.setCoursePic(course.getCoursePic());
         return orderMapper.addOrder(order);
     }
 
@@ -82,7 +86,18 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     @CachePut(cacheNames = "CourseServiceImpl.isBought", key = "#username+'-->'+#courseNo")
-    public boolean refreshBoughtCache(String username, int courseNo,boolean isBought) {
+    public boolean refreshBoughtCache(String username, int courseNo, boolean isBought) {
         return isBought;
+    }
+
+    /**
+     * 获取用户订单
+     *
+     * @param username 用户名
+     * @return 订单信息
+     */
+    @Override
+    public List<Order> getOrderList(String username) {
+        return orderMapper.selectOrdersByUsername(username);
     }
 }

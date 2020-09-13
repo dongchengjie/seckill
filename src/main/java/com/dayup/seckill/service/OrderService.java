@@ -1,5 +1,9 @@
 package com.dayup.seckill.service;
 
+import com.dayup.seckill.entities.Order;
+
+import java.util.List;
+
 /**
  * Author: 董成杰
  * Date: 2020-09-11 9:46
@@ -12,6 +16,8 @@ public interface OrderService {
 
     public boolean isBought(String username, int courseNo);
 
-    public boolean refreshBoughtCache(String username, int courseNo,boolean isBought);
+    public boolean refreshBoughtCache(String username, int courseNo, boolean isBought);
+
+    public List<Order> getOrderList(String username);
 
 }

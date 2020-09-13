@@ -10,6 +10,8 @@ import com.dayup.seckill.service.SeckillService;
 import com.dayup.seckill.util.IPUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,6 +51,7 @@ public class SeckillServiceImpl implements SeckillService {
     }
 
     //在缓存中操作数据，同时读操作加锁
+    @Transactional
     public synchronized ResponseResult seckill(String username, Integer courseNo) {
         ResponseResult result = new ResponseResult();
         Course course = courseService.getCourseByCourseNo(courseNo);

@@ -21,7 +21,7 @@
       <!-- 2 == orderStatus || item.payStatus == orderStatus ? '' : 'hide' -->
       <div class="order-nubmer">
         <span>订单编号:&nbsp;&nbsp; {{item.orderId}}</span>
-        <span class="order-datetime"><time>{{item.createDate | date-format}}</time></span>
+        <span class="order-datetime"><time>订单创建时间：{{item.createDate | date-format}}</time></span>
       </div>
 
       <div class="order-info">
@@ -30,7 +30,7 @@
 
         <div class="course-info">
           <span class="course-info-name">{{item.courseName}}</span>
-          <span class="course-info-price"> ￥{{item.payPrice == null ? 0 : item.payPrice}} </span>
+          <span class="course-info-price"> ￥{{item.coursePrice == null ? 0 : item.coursePrice}} </span>
         </div>
         <div class="order-pay-info">
           <div v-if="item.payStatus == 1">
@@ -70,10 +70,13 @@ export default {
     var self = this;
     self.axios.get('/api/orderList')
       .then(function(response) {
-        if (response.data.code == 200) {
-          self.orderList = response.data.data;
+        if (response.data.code == '200') {
+          self.orderList = response.data.data.orderList;
         } else {
           self.$message.error(response.data.message)
+        }
+        if (response.data.code == '2004') {
+          self.$router.push('/login'); //身份信息过期，请重新登录
         }
       })
       .catch(function(error) {
