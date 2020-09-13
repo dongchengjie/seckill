@@ -143,7 +143,7 @@ export default {
       var code = response.data.code;
       var self = this;
       switch (code) {
-        case 200:
+        case '200':
           self.showButtonType = 1;
           self.load = false;
           break;
