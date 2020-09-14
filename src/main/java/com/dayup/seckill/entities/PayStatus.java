@@ -6,8 +6,7 @@ package com.dayup.seckill.entities;
  * Description:
  */
 public class PayStatus {
-    public static final String PAYED = "已支付";
-    public static final String UNPAID = "未支付";
-    public static final String CANCELED = "已取消";
-    public static final String OUT_OF_DATE = "已过期";
+    public static final int PAYED = 1;          //已支付
+    public static final int UNPAID = 0;         //未支付
+    public static final int OUT_OF_DATE = -1;   //已过期
 }

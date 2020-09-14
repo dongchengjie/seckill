@@ -10,6 +10,7 @@ server:
   servlet:
     encoding:
       charset: utf-8
+      force: true
 
 #mybatis配置
 mybatis:
@@ -18,12 +19,21 @@ mybatis:
     map-underscore-to-camel-case: true
 
 spring:
-  #数据源配置
+  #数据源连接池配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 123456
     url: jdbc:mysql://120.78.201.5:3306/seckill?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=UTF-8
     username: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 10
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      filters: stat,wall
   #Redis配置
   redis:
     host: 120.78.201.5

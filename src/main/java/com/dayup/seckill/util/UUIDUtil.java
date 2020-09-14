@@ -1,6 +1,7 @@
 package com.dayup.seckill.util;
 
-import cn.hutool.core.lang.UUID;
+
+import java.util.UUID;
 
 /**
  * Author: 董成杰

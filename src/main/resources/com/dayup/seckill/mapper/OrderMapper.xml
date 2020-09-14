@@ -5,8 +5,8 @@
 <mapper namespace="com.dayup.seckill.mapper.OrderMapper">
     <insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
         insert into orders
-        (order_id,course_no,username,course_name,course_price,pay_status,create_date)
+        (order_id,course_no,username,course_name,course_price,pay_status,create_date,course_pic)
         values
-        (default,#{courseNo},#{username},#{courseName},#{coursePrice},#{payStatus},#{createDate})
+        (default,#{courseNo},#{username},#{courseName},#{coursePrice},#{payStatus},#{createDate},#{coursePic})
     </insert>
 </mapper>

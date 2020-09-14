@@ -35,7 +35,7 @@
           <!-- 右上讲师信息div -->
           <div class="detail-teacher-container">
             <!-- 讲师头像div -->
-            <img src="../assets/images/sam.png"></img>
+            <img src="../assets/images/teacher.png"></img>
             <!-- 讲师姓名 -->
             <span>讲师: {{course.teacherName}}</span>
           </div>
@@ -143,16 +143,19 @@ export default {
       var code = response.data.code;
       var self = this;
       switch (code) {
-        case 200:
-          // self.$message.success(response.data.message)
+        case '200':
           self.showButtonType = 1;
           self.load = false;
+          break;
+        case '2004':
+          self.$message.error(response.data.message);
+          self.$router.push('/login'); //身份信息过期，请重新登录
           break;
         case '3002':
           var self = this;
           self.isBookButtonDisabled = true;
           self.load = true;
-          self.loading_text=response.data.message
+          self.loading_text = response.data.message
           self.axios.get('/api/seckillResult/' + self.$route.params.courseNo)
             .then(function(response) {
               self.getResult(response);
@@ -161,29 +164,14 @@ export default {
               self.$message.error(response)
             });
           break;
-        case '3003':
-          self.load = false;
-          self.isBookButtonDisabled = false;
-          self.$message.error(response.data.message);
-          break;
-        case '3004':
-          self.load = false;
-          self.showButtonType = 1;
-          self.$message.error(response.data.message);
-          break;
-        case '3005':
-          self.load = false;
-          self.isBookButtonDisabled = false;
-          self.$message.error(response.data.message);
-          break;
-        case '3006':
-          self.load = false;
-          self.isBookButtonDisabled = false;
-          self.$message.error(response.data.message);
+        case '3007':
+          self.$message.success(response.data.message);
+          self.$router.push('/home/order/list'); //跳转到订单页面
           break;
         default:
-          self.$message.error('出错')
           self.load = false;
+          self.isBookButtonDisabled = false;
+          self.$message.error(response.data.message);
           break;
       }
     },
@@ -222,7 +210,6 @@ export default {
         self.courseTimerStatus = '已结束';
         self.showButtonType = 3;
       }
-
     },
     startTimer() {
       var self = this;
@@ -242,7 +229,7 @@ export default {
       var hours = parseInt(leftTime / (24 * 60) % 24)
       var mins = parseInt(leftTime / 60 % 60)
       var sec = parseInt(leftTime % 60)
-      self.courseTimerStatus = '距离开课时间还有 ${days}天${hours}小时${mins}分钟${sec}秒'
+      self.courseTimerStatus = "距离开课时间还有" + days + "天" + hours + "小时" + mins + "分钟" + sec + "秒"
       if (leftTime <= 0) {
         self.isTimerStop = true;
       }

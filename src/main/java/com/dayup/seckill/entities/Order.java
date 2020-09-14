@@ -19,7 +19,8 @@ public class Order implements Serializable {
     private String courseName;          //课程名称
     private BigDecimal coursePrice;     //课程价格
     private String payment;             //支付方式
-    private String payStatus;          //支付状态
+    private int payStatus;              //支付状态
     private Date payDate;               //支付时间
     private Date createDate;            //订单创建时间
+    private String coursePic;           //课程图片url
 }

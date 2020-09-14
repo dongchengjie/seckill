@@ -10,6 +10,7 @@ import com.dayup.seckill.service.SeckillService;
 import com.dayup.seckill.util.IPUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,14 +42,15 @@ public class SeckillServiceImpl implements SeckillService {
             result.setErrorInfo(ErrorList.FREQUENT_REQUEST);//您的请求过于频繁，请稍后再试
             return result;
         }
-        if (courseService.isBought(username, courseNo)) {
-            result.setErrorInfo(ErrorList.SECKILL_BOUGHT);//您已购买该课程，请去订单页面查看
+        if (orderService.isBought(username, courseNo)) {
+            result.setErrorInfo(ErrorList.SECKILL_BOUGHT);//您已购买过该课程，请不要重复购买
             return result;
         }
         return seckill(username, courseNo);
     }
 
     //在缓存中操作数据，同时读操作加锁
+    @Transactional
     public synchronized ResponseResult seckill(String username, Integer courseNo) {
         ResponseResult result = new ResponseResult();
         Course course = courseService.getCourseByCourseNo(courseNo);

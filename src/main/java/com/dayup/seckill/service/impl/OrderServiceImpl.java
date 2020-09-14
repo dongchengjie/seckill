@@ -9,10 +9,14 @@ import com.dayup.seckill.service.OrderService;
 import com.google.gson.Gson;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Author: 董成杰
@@ -46,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Integer createCourseOrder(String username, int courseNo) {
         Order order = new Order();
         Course course = courseService.getCourseByCourseNo(courseNo);
@@ -55,6 +60,51 @@ public class OrderServiceImpl implements OrderService {
         order.setCoursePrice(course.getCoursePrice());
         order.setPayStatus(PayStatus.UNPAID);
         order.setCreateDate(new Date(System.currentTimeMillis()));
+        order.setCoursePic(course.getCoursePic());
         return orderMapper.addOrder(order);
+    }
+
+    /**
+     * 查询用户是否某课程，并放入缓存
+     *
+     * @param username 用户名
+     * @param courseNo 课程号
+     * @return 是否购买某课程
+     */
+    @Override
+    @Cacheable(cacheNames = "CourseServiceImpl.isBought", key = "#username+'-->'+#courseNo")
+    public boolean isBought(String username, int courseNo) {
+        return orderMapper.selectCourseByUsernameAndCourseNo(username, courseNo) != null;
+    }
+
+    /**
+     * 刷新缓存中的购买状态
+     *
+     * @param username 用户名
+     * @param courseNo 课程号
+     * @return 刷新缓存
+     */
+    @Override
+    @CachePut(cacheNames = "CourseServiceImpl.isBought", key = "#username+'-->'+#courseNo")
+    public boolean refreshBoughtCache(String username, int courseNo, boolean isBought) {
+        return isBought;
+    }
+
+    /**
+     * 获取用户订单
+     *
+     * @param username 用户名
+     * @return 订单信息
+     */
+    @Override
+    @Cacheable(cacheNames = "OrderServiceImpl.getOrderListByUsername", key = "#username")
+    public List<Order> getOrderListByUsername(String username) {
+        return orderMapper.selectOrdersByUsername(username);
+    }
+
+    @Override
+    @CachePut(cacheNames = "OrderServiceImpl.getOrderListByUsername", key = "#username")
+    public List<Order> refreshOrderListByUsername(String username) {
+        return orderMapper.selectOrdersByUsername(username);
     }
 }

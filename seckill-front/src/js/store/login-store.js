@@ -24,7 +24,7 @@ export default {
         Vue.axios.post('/api/login', qs.stringify(payload))
           .then(function(response) {
             var result = response.data;
-            if (result.code == 200) {
+            if (result.code == '200') {
               context.commit('login', payload)
               resolve(response)
             } else {
@@ -46,8 +46,7 @@ export default {
         Vue.axios.post('/api/register', qs.stringify(payload))
           .then(function(response) {
             var result = response.data;
-            console.log(result)
-            if (result.code = 2003) {
+            if (result.code == '2003') {
               context.commit('register', payload)
               resolve(response)
             } else {

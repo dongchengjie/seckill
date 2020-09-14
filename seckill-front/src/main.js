@@ -22,6 +22,7 @@ Vue.use(VueAxios, Axios)
 Vue.use(Vuex)
 
 Axios.defaults.baseURL = 'http://localhost:8080'
+// Axios.defaults.baseURL = 'http://120.78.201.5:8080'
 Axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 Axios.defaults.withCredentials = true
 

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Description:图形验证码控制器
  */
 @Controller
-public class VerificationController {
+public class VerificationController extends BaseController{
     private static final int CODE_COUNT = 4;//验证码字符数
     private static final int THICKNESS = 4;//干扰线宽度
 

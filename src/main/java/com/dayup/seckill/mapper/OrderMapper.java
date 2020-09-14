@@ -1,11 +1,12 @@
 package com.dayup.seckill.mapper;
 
-import com.dayup.seckill.entities.Course;
 import com.dayup.seckill.entities.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Author: 董成杰
@@ -19,4 +20,7 @@ public interface OrderMapper {
 
     @Select("select * from orders where username = #{username} and course_no = #{courseNo}")
     public Order selectCourseByUsernameAndCourseNo(@Param("username") String username, @Param("courseNo") Integer courseNo);
+
+    @Select("select * from orders where username = #{username}")
+    public List<Order> selectOrdersByUsername(@Param("username") String username);
 }
