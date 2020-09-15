@@ -21,7 +21,7 @@ create table if not exists course (
 	teacher_name varchar(10) not null comment '讲师名字',
 	course_description varchar(255) comment '课程描述',
 	start_time datetime not null default current_timestamp comment '选课开始时间',
-	end_time datetime default null comment '选课结束时间',
+	end_time datetime not null comment '选课结束时间',
 	course_price decimal(10, 2) not null default '0.00',
 	stock_quantity int not null comment '库存',
 	course_pic varchar(255) comment '课程图片url'
